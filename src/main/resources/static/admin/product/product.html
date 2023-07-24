@@ -1,0 +1,85 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<li class="nav-item" role="presentation">
+		<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+			data-bs-target="#home" type="button" role="tab" aria-controls="home"
+			aria-selected="true">Form</button>
+	</li>
+	<li class="nav-item" role="presentation">
+		<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+			data-bs-target="#profile" type="button" role="tab"
+			aria-controls="profile" aria-selected="false">Edit</button>
+	</li>
+	<li class="nav-item" role="presentation">
+		<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+			data-bs-target="#contact" type="button" role="tab"
+			aria-controls="contact" aria-selected="false">Contact</button>
+	</li>
+</ul>
+<div class="tab-content" id="myTabContent">
+	<div class="tab-pane fade show active" id="home" role="tabpanel"
+		aria-labelledby="home-tab">
+		<table class="table ">
+			<thead>
+				<tr>
+					<th scope="col">Tên sản phẩm</th>
+					<th scope="col">Phân loại sản phẩm</th>
+					<th scope="col">Giá sản phẩm</th>
+					<th scope="col">Số lượng sản phẩm</th>
+					<th scope="col">Thao tác</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat-start="item in products">
+					<th rowspan="{{item.detailsDTOs.length + 1}}" scope="row">{{item.nameProduct}}</th>
+				</tr>
+				<tr ng-repeat-end ng-repeat="productdetail in item.detailsDTOs">
+					<td>{{productdetail.nameSize}},{{productdetail.nameColor}}</td>
+					<td>{{productdetail.price | currency:'' :0 }}Đ</td>
+					<td>{{productdetail.qty}}</td>
+					<td ng-if="$first" rowspan="{{item.detailsDTOs.length + 1}}"><button
+							ng-click="edit(item)">Edit</button></td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+	<div class="tab-pane fade" id="profile" role="tabpanel"
+		aria-labelledby="profile-tab">
+		<form>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="mb-3">
+						<label  class="form-label">ID PRODUCT: </label> 
+							<input ng-model="form.idProduct" type="text" class="form-control">
+					</div>
+					<div class="mb-3">
+						<label  class="form-label">NAME PRODUCT: </label>
+						<input ng-model="form.nameProduct" type="text" class="form-control">
+					</div>
+				</div>
+				
+				<div ng-repeat="productdetail in form.detailsDTOs" class="col-sm-6">
+					<div class="mb-3">
+						<label class="form-label">SIZE: </label> 
+							<input ng-model="productdetail.nameSize" type="text" class="form-control">
+					</div>
+					<div class="mb-3">
+						<label  class="form-label">COLOR: </label>
+						<input ng-model="productdetail.nameColor" type="text" class="form-control">
+					</div>
+					<div class="mb-3">
+						<label  class="form-label">PRICE: </label>
+						<input ng-model="productdetail.price" type="text" class="form-control">
+					</div>
+					<div class="mb-3">
+						<label  class="form-label">QTY: </label>
+						<input ng-model="productdetail.qty" type="text" class="form-control">
+					</div>
+				</div>
+			</div>
+			<button ng-click="create()" type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+	<div class="tab-pane fade" id="contact" role="tabpanel"
+		aria-labelledby="contact-tab">...</div>
+</div>
