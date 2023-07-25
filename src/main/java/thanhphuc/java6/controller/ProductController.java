@@ -36,11 +36,18 @@ public class ProductController {
 		return "layout/product_details";
 	}
 	
+
 	@GetMapping("/shop-category")
 	public String viewProductCategory(Model model, @RequestParam("idCategory") int idCategory) {
 		model.addAttribute("product", productService.findProductByIdCategory(idCategory));
 		model.addAttribute("brand", brandService.findBrandByIdCategory(idCategory));
 		return "layout/shopcategory";
+
+	@GetMapping("/cart")
+	public String viewcart(Model model) {
+		model.addAttribute("productDetail", productService.findAllProduct());
+		return "layout/cart";
+
 	}
 	
 }
