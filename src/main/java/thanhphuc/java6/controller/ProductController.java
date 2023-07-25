@@ -26,4 +26,10 @@ public class ProductController {
 		return "layout/product_details";
 	}
 	
+	@GetMapping("/cart")
+	public String viewcart(Model model) {
+		model.addAttribute("productDetail", productService.findAllProduct());
+		return "layout/cart";
+	}
+	
 }

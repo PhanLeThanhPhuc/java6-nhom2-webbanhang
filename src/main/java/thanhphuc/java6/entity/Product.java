@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,6 +56,7 @@ public class Product implements Serializable {
 	@Column(name ="sold_quantity")
 	private int soidQuantity ;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	Category category;
@@ -61,6 +64,7 @@ public class Product implements Serializable {
 	@OneToMany(mappedBy = "product")
 	List<OrderDetail> orderDetails ;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "brand_id")
 	Brand brand;
