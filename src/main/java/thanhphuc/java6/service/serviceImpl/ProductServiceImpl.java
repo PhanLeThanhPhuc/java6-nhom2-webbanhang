@@ -1,8 +1,12 @@
 package thanhphuc.java6.service.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import thanhphuc.java6.entity.Product;
@@ -15,8 +19,9 @@ public class ProductServiceImpl  implements ProductService{
 	@Autowired
 	ProductRepository productRepository;
 	
-	public List<Product> findAllProduct(){
-		return productRepository.findAll();
+	public Page<Product> findAllProduct(Optional<Integer> p){
+		Pageable pageable = PageRequest.of(p.orElse(0),8);
+		return productRepository.findAll(pageable);
 	}
 
 	@Override
@@ -25,8 +30,9 @@ public class ProductServiceImpl  implements ProductService{
 	}
 
 	@Override
-	public List<Product> findProductByIdCategory(int idCategory) {
-		return productRepository.findProductByIdCategory(idCategory);
+	public Page<Product> findProductByIdCategory(int idCategory, Optional<Integer> p) {
+		Pageable pageable = PageRequest.of(p.orElse(0),8);
+		return productRepository.findProductByIdCategory(idCategory,pageable);
 	}
 	
 }

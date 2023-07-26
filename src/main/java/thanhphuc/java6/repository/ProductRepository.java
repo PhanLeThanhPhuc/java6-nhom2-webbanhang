@@ -1,6 +1,9 @@
 package thanhphuc.java6.repository;
+
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,6 +14,6 @@ import thanhphuc.java6.entity.Product;
 public interface ProductRepository extends JpaRepository<Product, String>{
 
 	@Query("select p from Product p where p.category.id=:idCategory")
-	List<Product> findProductByIdCategory(@Param("idCategory") int idCategory);
+	Page<Product> findProductByIdCategory(@Param("idCategory") int idCategory, Pageable pageable);
 	
 }
