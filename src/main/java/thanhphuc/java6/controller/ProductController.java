@@ -1,5 +1,7 @@
 package thanhphuc.java6.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +26,8 @@ public class ProductController {
 	
 	
 	@GetMapping("/shop")
-	public String viewProduct(Model model) {
-		model.addAttribute("product", productService.findAllProduct());
+	public String viewProduct(Model model, @RequestParam("p") Optional<Integer> p ) {
+		model.addAttribute("product", productService.findAllProduct(p));
 		model.addAttribute("category", categoryService.findAllCategory());
 		return "layout/shop";
 	}
@@ -38,16 +40,16 @@ public class ProductController {
 	
 
 	@GetMapping("/shop-category")
-	public String viewProductCategory(Model model, @RequestParam("idCategory") int idCategory) {
-		model.addAttribute("product", productService.findProductByIdCategory(idCategory));
+	public String viewProductCategory(Model model, @RequestParam("idCategory") int idCategory, @RequestParam("p") Optional<Integer> p) {
+		model.addAttribute("product", productService.findProductByIdCategory(idCategory,p));
 		model.addAttribute("brand", brandService.findBrandByIdCategory(idCategory));
 		return "layout/shopcategory";
-
+	}
+	
 	@GetMapping("/cart")
-	public String viewcart(Model model) {
-		model.addAttribute("productDetail", productService.findAllProduct());
+	public String viewcart(Model model, @RequestParam("p") Optional<Integer> p) {
+		model.addAttribute("productDetail", productService.findAllProduct(p));
 		return "layout/cart";
-
 	}
 	
 }
