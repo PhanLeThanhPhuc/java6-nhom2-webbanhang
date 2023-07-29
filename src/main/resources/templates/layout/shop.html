@@ -79,14 +79,15 @@
 
 							<div class="toolbox-right">
 								<div class="toolbox-sort">
-									<label for="sortby">Sort by:</label>
+									<label for="sortby">Lọc:</label>
 									<div class="select-custom">
-										<select name="sortby" id="sortby" class="form-control">
-											<option value="popularity" selected="selected">Most
-												Popular</option>
-											<option value="rating">Most Rated</option>
-											<option value="date">Date</option>
-										</select>
+										<form id="myForm" th:action="@{/shop}" method="get">
+											<select onchange="document.getElementById('myForm').submit();" name="sortby" id="sortby" class="form-control">
+												<option th:selected="${s == 'asc'}" th:attr="value='asc'">GIá thấp đến cao</option>
+        										<option th:selected="${s == 'desc'}" th:attr="value='desc'">Giá cao đến thấp</option>
+											</select>
+											<p>[[${s}]]</p>
+										</form>
 									</div>
 								</div>
 								<!-- End .toolbox-sort -->
@@ -120,7 +121,9 @@
 												<!-- End .product-action-vertical -->
 
 												<div class="product-action">
+
 													 <a  th:attr="ng-click=@{|cart.add('${product.id}')|}" class="btn-product btn-cart"><span>add to cart</span></a>
+
 												</div>
 												<!-- End .product-action -->
 											</figure>
@@ -153,9 +156,15 @@
 
 
 						<div class="m-auto" style="max-width: 1300px;">
+						
 							<nav aria-label="Page navigation">
 								<ul class="pagination" id="pagination"></ul>
 							</nav>
+							
+							<form id="sumitForm" action="/shop" method="get">
+								<input id="page" name="p" type="hidden">
+							</form>
+							
 						</div>
 					</div>
 					<!-- End .col-lg-9 -->
@@ -549,12 +558,7 @@
                                 </div><!-- End .row -->
                             </div><!-- End .products -->
 
-
-                			 <div class="m-auto" style="max-width: 1300px;">
-					                <nav aria-label="Page navigation">
-					                    <ul class="pagination" id="pagination"></ul>
-					                </nav>
-          				    </div>
+                			 
                 		</div><!-- End .col-lg-9 -->
                 		
                 		<aside class="col-lg-3 order-lg-first">
@@ -810,6 +814,26 @@
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
         </main><!-- End .main -->
-
+		<input type="text" id="totalPages" th:value="${product.totalPages}">
 </body>
 </html>
+<script th:inline="javascript">
+
+	$(function () {
+	    window.pagObj = $('#pagination').twbsPagination({
+	        totalPages: /*[[${product.totalPages}]]*/,
+	        visiblePages: 5,
+	        startPage: /*[[${product.number+1}]]*/,
+	        onPageClick: function (event, page) {
+	            console.info(page)
+	            
+	            if(page!=/*[[${product.number+1}]]*/){
+	            	$('#page').val(parseInt(page-1));
+	            	$('#sumitForm').submit();
+	            }
+	        }
+	    }).on('page', function (event, page) {
+	        console.info(page + ' (from event listening)');
+	    });
+	});
+</script>
