@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Tất cả sản phẩm</title>
+<style>
+.col-sm-2 .text-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+</style>
+</head>
+<body>
+	<main class="main">
+		<div class="page-header text-center"
+			style="background-image: url('assets/images/page-header-bg.jpg')">
+			<div class="container">
+				<h1 class="page-title">
+					Checkout<span>Shop</span>
+				</h1>
+			</div>
+			<!-- End .container -->
+		</div>
+		<!-- End .page-header -->
+		<nav aria-label="breadcrumb" class="breadcrumb-nav">
+			<div class="container">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item"><a href="#">Shop</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+				</ol>
+			</div>
+			<!-- End .container -->
+		</nav>
+		<!-- End .breadcrumb-nav -->
+
+		<div class="page-content">
+			<div class="checkout">
+				<div class="container">
+					<div class="checkout-discount">
+						
+					</div>
+					<!-- End .checkout-discount -->
+					<form action="#">
+						<div class="row">
+							<div class="col-lg-9">
+								<h2 class="checkout-title">Billing Details</h2>
+								<!-- End .checkout-title -->
+								<div class="row">
+									<div class="col-sm-12">
+										<label>Họ và tên</label> <input type="text"
+											class="form-control" required>
+									</div>
+									<!-- End .col-sm-6 -->
+
+
+								</div>
+								<!-- End .row -->
+
+								<label>Tỉnh/Thành</label> 
+								<input type="text" ng-model="order.province"
+									class="form-control" placeholder="Tỉnh thành cư trú"> 
+									<label>Quận/Huyện</label> <input
+									type="text" ng-model="order.district" class="form-control" placeholder="Quận huyện cư trú" required> 
+									<label>Xã/Phường</label>
+								<input type="text" ng-model="order.ward" class="form-control"
+									placeholder="Xã phường cư trú" required>
+
+
+								<!-- End .row -->
+								<label>Số điện thoại</label> <input type="number" class="form-control"
+									placeholder="Số điện thoại" required>
+
+								<!-- End .row -->
+
+
+
+								<!-- End .custom-checkbox -->
+
+
+								<!-- End .custom-checkbox -->
+
+
+							</div>
+							<!-- End .col-lg-9 -->
+							<aside class="col-lg-3">
+								<div class="summary">
+									<h3 class="summary-title">Đơn Đặt Hàng Của Bạn</h3>
+									<!-- End .summary-title -->
+
+									<table class="table table-summary">
+										<thead>
+											<tr>
+												<th>Sản phẩm</th>
+												<th>Tổng</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											
+											<tr class="summary-total">
+												<td>Tổng cộng:</td>
+												<td>{{cart.amount | currency:'' :0}}</td>
+											</tr>
+											<!-- End .summary-total -->
+										</tbody>
+									</table>
+									<!-- End .table table-summary -->
+
+									
+									<!-- End .accordion -->
+
+									<button type="submit" ng-click="order.purchase()"
+										class="btn btn-outline-primary-2 btn-order btn-block">
+										<span class="btn-text">Place Order</span> <span
+											class="btn-hover-text">Proceed to Checkout</span>
+									</button>
+								</div>
+								<!-- End .summary -->
+							</aside>
+							<!-- End .col-lg-3 -->
+						</div>
+						<!-- End .row -->
+					</form>
+				</div>
+				<!-- End .container -->
+			</div>
+			<!-- End .checkout -->
+		</div>
+		<!-- End .page-content -->
+	</main>
+	<!-- End .main -->
+</body>
+</html>

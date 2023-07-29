@@ -45,7 +45,7 @@ public class OrderDetail implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="product_id")
-	Product product;
+	Product product;   
 	
 	@ManyToOne
 	@JoinColumn(name="Order_id")
