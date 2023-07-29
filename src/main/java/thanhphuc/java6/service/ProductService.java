@@ -8,9 +8,11 @@ import thanhphuc.java6.entity.Product;
 
 public interface ProductService {
 
-	Page<Product> findAllProduct(Optional<Integer> p);
+	Page<Product> findAllProduct( Optional<String> sort, Optional<Integer> p);
 	
 	Product findByIdProduct(String idProduct);
 	
 	Page<Product> findProductByIdCategory(int idCategory, Optional<Integer> p);
+	
+	List<Product> findProductByIdCategoryAndIdBrand(int idCategory,int idBrand);
 }
