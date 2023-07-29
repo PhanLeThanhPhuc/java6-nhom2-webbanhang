@@ -39,14 +39,7 @@
                         <div style="max-width: 1300px; background-color: #fff;" class="m-auto p-3">
                             <div style="display: flex; flex-wrap: wrap;">
                                 <!--  <c:forEach items="${brandByIdCategory}" var="brand">-->
-                               	<th:block th:each="brand : ${brand}">
-                                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
-                                        <a th:href="@{|/shop-brand?idBrand=${brand.id}&idCategory=${idCategory}|}"
-                                            style="align-items: center; border: 1px solid #e0e0e0; border-radius: 4px; color: #333; display: flex; font-size: 14px; line-height: 13px; margin-right: 8px; margin-bottom: 10px; min-height: 36px; max-height: 36px; padding: 6px 13px; vertical-align: top;"
-                                            href=""> <img th:src="@{|image/${brand.img}|}" style="width: 90px;" alt="">
-                                        </a>
-                                    </div>
-                                </th:block>
+                               	
                                <!-- </c:forEach> --> 
                             </div>
                         </div>
@@ -82,7 +75,7 @@
 
                             <div class="products mb-3">
                                 <div class="row ">
-								<th:block th:each="product : ${product.content}">
+								<th:block th:each="product : ${product}">
 
 									<div class="col-6 col-md-4 col-lg-4 col-xl-3">
 										<div class="product product-7 text-center">

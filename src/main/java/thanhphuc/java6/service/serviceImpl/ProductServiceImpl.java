@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import thanhphuc.java6.entity.Product;
@@ -19,9 +21,16 @@ public class ProductServiceImpl  implements ProductService{
 	@Autowired
 	ProductRepository productRepository;
 	
-	public Page<Product> findAllProduct(Optional<Integer> p){
-		Pageable pageable = PageRequest.of(p.orElse(0),8);
-		return productRepository.findAll(pageable);
+	public Page<Product> findAllProduct( Optional<String> s,Optional<Integer> p){
+		if(s.isPresent() && s.get().equals("desc")) {
+			Sort sort = Sort.by(Direction.DESC,"price");
+			Pageable pageable = PageRequest.of(p.orElse(0),8, sort);
+			return productRepository.findAll(pageable);
+		}else {
+			Sort sort = Sort.by(Direction.ASC,"price");
+			Pageable pageable = PageRequest.of(p.orElse(0),8, sort);
+			return productRepository.findAll(pageable);
+		}
 	}
 
 	@Override
@@ -33,6 +42,11 @@ public class ProductServiceImpl  implements ProductService{
 	public Page<Product> findProductByIdCategory(int idCategory, Optional<Integer> p) {
 		Pageable pageable = PageRequest.of(p.orElse(0),8);
 		return productRepository.findProductByIdCategory(idCategory,pageable);
+	}
+
+	@Override
+	public List<Product> findProductByIdCategoryAndIdBrand(int idCategory, int idBrand) {
+		return productRepository.findProductByIdCategoryAndIdBrand(idCategory, idBrand);
 	}
 	
 }

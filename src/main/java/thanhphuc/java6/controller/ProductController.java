@@ -26,8 +26,9 @@ public class ProductController {
 	
 	
 	@GetMapping("/shop")
-	public String viewProduct(Model model, @RequestParam("p") Optional<Integer> p ) {
-		model.addAttribute("product", productService.findAllProduct(p));
+	public String viewProduct(Model model,@RequestParam("sortby") Optional<String> s, @RequestParam("p") Optional<Integer> p ) {
+		model.addAttribute("product", productService.findAllProduct(s,p));
+		model.addAttribute("s", s.isPresent() ? s.get() : "asc");
 		model.addAttribute("category", categoryService.findAllCategory());
 		return "layout/shop";
 	}
@@ -43,13 +44,20 @@ public class ProductController {
 	public String viewProductCategory(Model model, @RequestParam("idCategory") int idCategory, @RequestParam("p") Optional<Integer> p) {
 		model.addAttribute("product", productService.findProductByIdCategory(idCategory,p));
 		model.addAttribute("brand", brandService.findBrandByIdCategory(idCategory));
+		model.addAttribute("idCategory", idCategory);
 		return "layout/shopcategory";
 	}
 	
 	@GetMapping("/cart")
 	public String viewcart(Model model, @RequestParam("p") Optional<Integer> p) {
-		model.addAttribute("productDetail", productService.findAllProduct(p));
+//		model.addAttribute("productDetail", productService.findAllProduct(p));
 		return "layout/cart";
+	}
+	
+	@GetMapping("/shop-brand")
+	public String viewProductBrand(Model model, @RequestParam("idCategory") int idCategory, @RequestParam("idBrand") int idBrand) {
+		model.addAttribute("product", productService.findProductByIdCategoryAndIdBrand(idCategory, idBrand));
+		return "layout/shopbrand";
 	}
 	
 }
