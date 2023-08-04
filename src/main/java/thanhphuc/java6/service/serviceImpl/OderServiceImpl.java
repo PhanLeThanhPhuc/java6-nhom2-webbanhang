@@ -27,12 +27,12 @@ public class OderServiceImpl implements OrderService {
 
 	@Override
 	public Order create(JsonNode orderData) {
+		
 		ObjectMapper mapper = new ObjectMapper();
 
 		Order order = mapper.convertValue(orderData, Order.class);
-		Long id = (long) (dao.selectMaxIdOrder() == null ? 1 : dao.selectMaxIdOrder());
+		int id = (int) (dao.selectMaxIdOrder() == null ? 1 : dao.selectMaxIdOrder());
 		order.setId(id);
-		System.out.println("Test: "+order.toString());
 		dao.save(order);
 		TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};
 		List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetails"), type)
@@ -45,7 +45,7 @@ public class OderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order findById(Integer id) {
+	public Order findById(int id) {
 		return dao.findById(id).get();
 
 	}
