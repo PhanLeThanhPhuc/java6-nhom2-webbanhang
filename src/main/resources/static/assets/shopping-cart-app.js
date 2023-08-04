@@ -82,6 +82,7 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 			var json = localStorage.getItem("cart");
 			this.product = json ? JSON.parse(json): [];
 			console.log('load',this.product);
+			
 		}
 	}
 	
@@ -97,6 +98,7 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 			province: "",
 			district: "",
 			ward: "",
+			payment: "1",
 			status: 'X',
 			total: $scope.cart.amount,
 			get orderDetails(){
@@ -118,8 +120,12 @@ app.controller("shopping-cart-ctrl",function($scope,$http){
 				// Thực hiện đặt hàng
 				$http.post("/rest/orders", order).then(resp => {
 					alert("Đặt hàng thành công!");
-					$cart.clear();
-					location.href = "/order/detail/" + resp.data.id;
+					console.log(resp.data);
+					//$cart.clear();
+					//location.href = resp.data.url;
+					location.href = "/payment?payment="+resp.data.data.payment+"&total="+resp.data.data.total+"&id="+resp.data.data.id;
+					//console.log(resp.data.data.payment);
+					console.log(resp.data.data.id);
 				}).catch(error => {
 					alert("Đặt hàng lỗi!")
 					console.log(error)

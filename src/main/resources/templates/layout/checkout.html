@@ -99,7 +99,34 @@
 										</thead>
 
 										<tbody>
-											
+											<tr class="summary-subtotal">
+	                							<td>Subtotal:</td>
+	                							<td>{{cart.amount | currency:'' :0}}</td>
+	                						</tr><!-- End .summary-subtotal -->
+	                						<tr class="summary-shipping">
+	                							<td>Hình thức thanh toán:</td>
+	                							<td>&nbsp;</td>
+	                						</tr>
+
+	                						<tr class="summary-shipping-row">
+	                							<td>
+													<div class="custom-control custom-radio">
+														<input ng-model="order.payment" type="radio" checked value="1" id="free-shipping" name="shipping" class="custom-control-input">
+														<label class="custom-control-label" for="free-shipping">Tiền mặt</label>
+													</div><!-- End .custom-control -->
+	                							</td>
+	                							
+	                						</tr><!-- End .summary-shipping-row -->
+
+	                						<tr class="summary-shipping-row">
+	                							<td>
+	                								<div class="custom-control custom-radio">
+														<input ng-model="order.payment" type="radio" value="2" id="standart-shipping" name="shipping" class="custom-control-input">
+														<label class="custom-control-label" for="standart-shipping">Chuyển khoản</label>
+													</div><!-- End .custom-control -->
+	                							</td>
+	                						
+	                						</tr><!-- End .summary-shipping-row -->
 											<tr class="summary-total">
 												<td>Tổng cộng:</td>
 												<td>{{cart.amount | currency:'' :0}}</td>
@@ -114,8 +141,7 @@
 
 									<button type="submit" ng-click="order.purchase()"
 										class="btn btn-outline-primary-2 btn-order btn-block">
-										<span class="btn-text">Place Order</span> <span
-											class="btn-hover-text">Proceed to Checkout</span>
+										Đặt hàng
 									</button>
 								</div>
 								<!-- End .summary -->
