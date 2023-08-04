@@ -48,5 +48,23 @@ public class ProductServiceImpl  implements ProductService{
 	public List<Product> findProductByIdCategoryAndIdBrand(int idCategory, int idBrand) {
 		return productRepository.findProductByIdCategoryAndIdBrand(idCategory, idBrand);
 	}
+
+	@Override
+	public List<Product> findAll() {
+		// TODO Auto-generated method stub
+		return productRepository.findAll();
+	}
+	
+	public Product create(Product product) {
+		return productRepository.save(product);
+	}
+
+	public Product update(Product product) {
+		return productRepository.save(product);
+	}
+
+	public void delete(String id) {
+		productRepository.deleteById(id);
+	}
 	
 }

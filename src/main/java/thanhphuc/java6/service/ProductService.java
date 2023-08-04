@@ -16,4 +16,12 @@ public interface ProductService {
 	Page<Product> findProductByIdCategory(int idCategory, Optional<Integer> p);
 	
 	List<Product> findProductByIdCategoryAndIdBrand(int idCategory,int idBrand);
+	
+	List<Product> findAll();
+	
+	public Product create(Product product) ;
+
+	public Product update(Product product) ;
+
+	public void delete(String id) ;
 }
