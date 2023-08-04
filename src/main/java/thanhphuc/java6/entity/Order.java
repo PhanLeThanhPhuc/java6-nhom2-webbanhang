@@ -15,24 +15,23 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name ="Orders")
 public class Order implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="Order_id")
-	private long id;
+	private int id;
 	
 	@Column(name="Order_date")
 	@Temporal(TemporalType.DATE)
@@ -53,6 +52,9 @@ public class Order implements Serializable {
 	
 	@Column(name="ward")
 	private String ward;
+	
+	@Column(name="payment")
+	private int payment;
 	
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;

@@ -8,4 +8,5 @@ public interface BrandService {
 
 	List<Brand> findBrandByIdCategory(int idCategory);
 	
+	List<Brand> findAllBrand();
 }

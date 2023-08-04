@@ -15,47 +15,140 @@
 			aria-controls="contact" aria-selected="false">Contact</button>
 	</li>
 </ul>
-<div class="tab-content" id="myTabContent">
+<div class="tab-content"  id="myTabContent">
 	<div class="tab-pane fade show active" id="home" role="tabpanel"
 		aria-labelledby="home-tab">
 		<table class="table ">
 			<thead>
 				<tr>
-					<th scope="col">Tên sản phẩm</th>
-					<th scope="col">Phân loại sản phẩm</th>
-					<th scope="col">Giá sản phẩm</th>
-					<th scope="col">Số lượng sản phẩm</th>
-					<th scope="col">Thao tác</th>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Image</th>
+					<th scope="col">Category</th>
+					<th scope="col">Brand</th>
+					<th scope="col">Desc</th>
+					<th scope="col">Qty</th>
+					<th scope="col">Price</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat-start="item in products">
-					<th rowspan="{{item.detailsDTOs.length + 1}}" scope="row">{{item.nameProduct}}</th>
-				</tr>
-				<tr ng-repeat-end ng-repeat="productdetail in item.detailsDTOs">
-					<td>{{productdetail.nameSize}},{{productdetail.nameColor}}</td>
-					<td>{{productdetail.price | currency:'' :0 }}Đ</td>
-					<td>{{productdetail.qty}}</td>
-					<td ng-if="$first" rowspan="{{item.detailsDTOs.length + 1}}"><button
-							ng-click="edit(item)">Edit</button></td>
-				</tr>
+				<tr ng-repeat="item in pager.items">
+				<td>{{item.id}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.img}}</td>
+				<td>{{item.category.name}}</td>
+				<td>{{item.brand.name}}</td>
+				<td>{{item.description}}</td>
+				<td>{{item.qty}}</td>
+				<td>{{item.price | number : 2}}</td>
+				<td>
+					<div class="btn-group btn-group-xs">
+						<a ng-click="edit(item)" href="" class="btn btn-warning">
+							<i class="bi bi-pencil-square"></i>
+						</a>
+						<a ng-click="delete(item)" href="" class="btn btn-danger">
+							<i class="bi bi-trash3"></i>
+						</a>
+					</div>
+				</td>
+			</tr>
 			</tbody>
 
 		</table>
+		<div class="panel-footer text-center">
+		<button ng-click="pager.first()" class="btn btn-danger">
+			<i class="bi bi-skip-backward-fill"></i>
+		</button>
+		<button ng-click="pager.prev()" class="btn btn-primary">
+			<i class="bi bi-skip-start-fill"></i>
+		</button>
+		<button class="btn btn-success">
+			{{pager.page + 1}} of {{pager.count}}
+		</button>
+		<button ng-click="pager.next()" class="btn btn-primary">
+			<i class="bi bi-skip-end-fill"></i>
+		</button>
+		<button ng-click="pager.last()" class="btn btn-danger">
+			<i class="bi bi-skip-forward-fill"></i>
+		</button>
+	</div>
 	</div>
 	<div class="tab-pane fade" id="profile" role="tabpanel"
 		aria-labelledby="profile-tab">
 		<form>
-			<div class="row">
-				<div class="col-sm-6">
-					<div class="mb-3">
-						<label  class="form-label">ID PRODUCT: </label> 
-							<input ng-model="form.idProduct" type="text" class="form-control">
+			<div ceduitlass="row">
+				<div class="panel panel-default">
+	<div class="panel-heading"></div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-4 text-center">
+				<label for="image">
+					<img ng-src="{{'/image/'+form.img}}" style="max-width:100%;height:200px">
+				</label>
+			</div>
+			<div class="col-sm-8">
+				<div class="row">
+					<div class="form-group col-sm-12">
+						<div>Tên sản phẩm</div>
+						<input ng-model="form.name" class="form-control">
 					</div>
-					<div class="mb-3">
-						<label  class="form-label">NAME PRODUCT: </label>
-						<input ng-model="form.nameProduct" type="text" class="form-control">
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-6">
+						<div>Mã sản phẩm</div>
+						<input ng-model="form.id" class="form-control">
 					</div>
+					<div class="form-group col-sm-6">
+						<div>Giá</div>
+						<input ng-model="form.price" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-6">
+						<div>Ảnh</div>
+						<input type="file" class="form-control" id="image"
+							onchange="angular.element(this).scope().imageChanged(this.files)">
+					</div>
+					<div class="form-group col-sm-6">
+						<div>Số lượng</div>
+						<input ng-model="form.qty" type="number" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-sm-6">
+						<div>Hãng</div>
+						<select ng-model="form.brand.id" class="form-control">
+							<option ng-repeat="b in brand" ng-value="b.id">{{b.name}}</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-6">
+						<div>Loại</div>
+						<select ng-model="form.category.id" class="form-control">
+							<option ng-repeat="c in category" ng-value="c.id">{{c.name}}</option>
+						</select>
+					</div>
+				</div>
+						
+			</div>
+		</div>
+	</div>
+	<div class="panel-footer text-center mt-3">
+		<button ng-click="create()" class="btn btn-primary">
+			<i class="bi bi-plus-circle"></i> Create
+		</button>
+		<button ng-click="update()"  class="btn btn-success">
+			<i class="bi bi-arrow-bar-up"></i> Update
+		</button>
+		<button ng-click="delete(form)"  class="btn btn-danger">
+			<i class="bi bi-trash3"></i> Delete
+		</button>
+		<button ng-click="reset()" class="btn btn-info">
+			<i class="bi bi-x-square"></i> Reset
+		</button>
+	</div>
+</div>
+				
+				
 				</div>
 				
 				<div ng-repeat="productdetail in form.detailsDTOs" class="col-sm-6">

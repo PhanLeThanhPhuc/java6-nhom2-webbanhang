@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +40,7 @@ public class Category implements Serializable {
 	@Column(name ="category_img")
 	private String img; 
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "category")
 	List<Product> products;
 }

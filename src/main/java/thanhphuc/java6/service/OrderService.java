@@ -9,7 +9,7 @@ import thanhphuc.java6.entity.Order;
 public interface OrderService {
 	public Order create(JsonNode orderData);
 
-	public Order findById(Integer id);
+	public Order findById(int id);
 
 	public List<Order> findByUsername(String username);
 
