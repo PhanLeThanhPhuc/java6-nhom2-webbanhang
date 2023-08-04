@@ -56,15 +56,16 @@ public class Product implements Serializable {
 	@Column(name ="sold_quantity")
 	private int soidQuantity ;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	Category category;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "product")
 	List<OrderDetail> orderDetails ;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "brand_id")
 	Brand brand;

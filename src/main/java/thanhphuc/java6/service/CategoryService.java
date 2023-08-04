@@ -9,6 +9,6 @@ import thanhphuc.java6.entity.Category;
 public interface CategoryService {
 	
 	List<Category> findAllCategory();
-	
+
 	
 }
