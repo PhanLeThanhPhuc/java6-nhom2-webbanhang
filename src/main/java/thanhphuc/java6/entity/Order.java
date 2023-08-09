@@ -57,6 +57,7 @@ public class Order implements Serializable {
 	
 	@Column(name="payment")
 	private int payment;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "order")
 	List<OrderDetail> orderDetails;

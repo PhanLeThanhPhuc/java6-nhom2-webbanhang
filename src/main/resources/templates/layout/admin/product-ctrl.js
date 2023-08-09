@@ -1,4 +1,4 @@
-app.controller("product-ctrl", function($scope, $http){
+/*app.controller("product-ctrl", function($scope, $http){
 	$scope.initialize = function(){
 		$http.get("/rest/categories").then(resp => {
 			$scope.categories = resp.data;
@@ -111,4 +111,4 @@ app.controller("product-ctrl", function($scope, $http){
 			this.page--;
 		}
 	}
-});
+}); */

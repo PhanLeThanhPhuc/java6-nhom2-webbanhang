@@ -36,6 +36,7 @@ public class Role implements Serializable{
 	
 	@Column(name="name")
 	String name;
+	
 	@JsonIgnore
 	@OneToMany(mappedBy = "role")
 	List<Authority> authorities;	

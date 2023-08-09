@@ -17,8 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Getter
 @Setter
 @Entity
@@ -42,6 +41,7 @@ public class Account implements Serializable {
 	
 	@Column(name = "email")
 	String email;
+	
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "account" , fetch = FetchType.EAGER)

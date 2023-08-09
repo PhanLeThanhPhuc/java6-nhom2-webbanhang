@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import thanhphuc.java6.service.AccountService;
 
-//import lombok.Getter;
-
 @Controller
 public class SecurityController {
 	
