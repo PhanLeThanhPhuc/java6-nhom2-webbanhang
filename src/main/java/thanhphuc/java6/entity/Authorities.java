@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Authorities")
+@Table(name = "Authorities", uniqueConstraints = {
+		@UniqueConstraint(columnNames = {"username", "role_id"})
+})
 public class Authorities implements Serializable {
 
 	/**

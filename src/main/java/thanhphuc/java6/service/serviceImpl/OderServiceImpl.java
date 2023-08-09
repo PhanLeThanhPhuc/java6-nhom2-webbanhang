@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import thanhphuc.java6.entity.Account;
 import thanhphuc.java6.entity.Order;
 import thanhphuc.java6.entity.OrderDetail;
 import thanhphuc.java6.repository.OrderDetailRepository;
@@ -26,13 +27,16 @@ public class OderServiceImpl implements OrderService {
 	OrderDetailRepository ddao;
 
 	@Override
-	public Order create(JsonNode orderData) {
+	public Order create(JsonNode orderData, String userName) {
 		
 		ObjectMapper mapper = new ObjectMapper();
 
 		Order order = mapper.convertValue(orderData, Order.class);
 		int id = (int) (dao.selectMaxIdOrder() == null ? 1 : dao.selectMaxIdOrder());
 		order.setId(id);
+		Account account = new Account();
+		account.setUsername(userName);
+		order.setAccount(account);
 		dao.save(order);
 		TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};
 		List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetails"), type)
@@ -54,6 +58,11 @@ public class OderServiceImpl implements OrderService {
 	public List<Order> findByUsername(String username) {
 		return dao.findByUsername(username);
 
+	}
+
+	@Override
+	public List<Order> findOrderByUserId(String username) {
+		return dao.findOrderByUserId(username);
 	}
 
 }

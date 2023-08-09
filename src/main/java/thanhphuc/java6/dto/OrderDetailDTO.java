@@ -26,4 +26,5 @@ public class OrderDetailDTO {
 
 	private int qty;
 
+	
 }

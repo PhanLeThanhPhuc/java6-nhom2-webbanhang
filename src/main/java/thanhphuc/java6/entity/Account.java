@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -40,13 +41,7 @@ public class Account implements Serializable {
 	@Column(name = "email")
 	String email;
 	
-	@Column(name = "id_google")
-	String id_google;
-	
-	@Column(name = "id_facebook")
-	String id_facebook;
-	
-	@OneToMany(mappedBy = "account")
+	@OneToMany(mappedBy = "account" , fetch = FetchType.EAGER)
 	List<Authorities> authorities;
 
 	

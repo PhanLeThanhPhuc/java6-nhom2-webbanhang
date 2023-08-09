@@ -16,18 +16,18 @@ import thanhphuc.java6.service.OrderService;
 
 @Controller
 public class OderController {
-	
+
 	@Autowired
 	private VNPayService vnPayService;
-	
+
 	@Autowired
 	OrderService orderService;
-	
+
 	@Autowired
 	OrderDetailService orderDetailService;
-	
+
 	int idOrder = 0;
-	
+
 	@RequestMapping("/checkout")
 	public String checkout() {
 		return "layout/checkout";
@@ -38,7 +38,7 @@ public class OderController {
 		model.addAttribute("order", orderService.findById(id));
 		return "order/detail";
 	}
-	
+
 	@RequestMapping("/order/list")
 	public String detail(Model model, HttpServletRequest request) {
 		String username = request.getRemoteUser();
@@ -46,37 +46,35 @@ public class OderController {
 		return "order/list";
 	}
 
-	 @GetMapping("/vnpay-payment")
-	    public String GetMapping(HttpServletRequest request, Model model){
-	        int paymentStatus =vnPayService.orderReturn(request);
+	@GetMapping("/vnpay-payment")
+	public String GetMapping(HttpServletRequest request, Model model) {
+		int paymentStatus = vnPayService.orderReturn(request);
 //	        return paymentStatus == 1 ? "ordersuccess" : "orderfail";
-	        return "redirect:/order-success?idOrder="+idOrder;
-	    }
-	 
-	 @GetMapping("/order-success")
-	 public String viewOrderSuccess(@RequestParam("idOrder") int idOrder, Model model) {
-		 model.addAttribute("order", orderService.findById(idOrder));
-		 model.addAttribute("orderDetail", orderDetailService.findOrderDetailDTO(idOrder));
-		 return "/layout/ordersucess";
-	 }
-	 
-		
-		@GetMapping("/payment")
-		public String payment(@RequestParam("payment") int payment, 
-				HttpServletRequest request, 
-				@RequestParam("total") int total
-				,@RequestParam("id") int idOrder) {
-			this.idOrder = idOrder;
-			String des = "testorder";
-			String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-			String vnpayUrl = vnPayService.createOrder(total, des, baseUrl);
-			
-			if(payment == 1) {
-				return "redirect:/order-success?idOrder="+idOrder;
-			}else {
-				System.out.println(vnpayUrl);
-				 return "redirect:" + vnpayUrl;
-			}
+		return "redirect:/order-success?idOrder=" + idOrder;
+	}
+
+	@GetMapping("/order-success")
+	public String viewOrderSuccess(@RequestParam("idOrder") int idOrder, Model model) {
+		model.addAttribute("order", orderService.findById(idOrder));
+		model.addAttribute("orderDetail", orderDetailService.findOrderDetailDTO(idOrder));
+		return "/layout/ordersucess";
+	}
+
+	@GetMapping("/payment")
+	public String payment(@RequestParam("payment") int payment, HttpServletRequest request,
+			@RequestParam("total") int total, @RequestParam("id") int idOrder) {
+		this.idOrder = idOrder;
+		String des = "testorder";
+		String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+		String vnpayUrl = vnPayService.createOrder(total, des, baseUrl);
+
+		if (payment == 1) {
+			return "redirect:/order-success?idOrder=" + idOrder;
+		} else {
+			System.out.println(vnpayUrl);
+			return "redirect:" + vnpayUrl;
 		}
+	}
+	
 	
 }

@@ -4,7 +4,6 @@
  <meta charset="UTF-8">
 <title>Tất cả sản phẩm</title>
 <style>
-  
     .col-sm-2 .text-center {
       display: flex;
       justify-content: center;
@@ -57,23 +56,25 @@
                        <div class="row">
                              <div class="col-sm-6" style="border-radius: 10px; ">
                                         <div >
-                                            <h6 class="mb-3" style="font-weight: 700;">THÔNG TIN KHÁCH HÀNG</h6>
-                                            <p style="font-weight: 500;">Họ và tên: Nguyễn Báo Thủ</p>
-                                            <p style="font-weight: 500;">Địa chỉ: Bình dương</p>
-                                                   <p style="font-weight: 500;">Số điện thoại: 0909090909</p>
+                                            <h6 class="mb-2" style="font-weight: 700;">THÔNG TIN KHÁCH HÀNG</h6>
+                                            <p style="font-weight: 500;">Tên khách hàng: [[${user.username}]]</p>
+                                            <p style="font-weight: 500;">Địa chỉ: [[${order.province}]], [[${order.district}]], [[${order.ward}]]	</p>
+                                                   <p style="font-weight: 500;">Số điện thoại: </p>
                                         </div>
                                     </div>
                                     <div class="col-sm-6" style="border-radius: 10px;">
                                         <div >
-                                        <h6 class="mb-3" style="font-weight: 700;">THÔNG TIN ĐƠN HÀNG</h6>
-                                        <p style="font-weight: 500;">Mã đơn hàng: 001</p>
-                                        <p style="font-weight: 500;">Ngày đặt:02/08/2023
+                                        <h6 class="mb-2" style="font-weight: 700;">THÔNG TIN ĐƠN HÀNG</h6>
+                                        <p style="font-weight: 500;">Mã đơn hàng: [[${order.id}]]</p>
+                                        <p style="font-weight: 500;">Ngày đặt: [[${order.date}]]
                                            </p>
-                                           <p style="font-weight: 500;">Trạng thái:   <c:choose>
-                            <c:when test="${Order.status == 'X'}">
-                                <span style="color: blue; font-style: italic;">Đang xử lí</span>
-                           
-                        </c:choose></p>
+                                           <p style="font-weight: 500;">Trạng thái:  
+                                           <td th:if="${order.status eq 'X'}"><span style="color: blue; font-style: italic; font-weight: bold;">Đang xử lí</span></td>
+											<td th:if="${order.status eq 'H'}"><span style="color: red; font-style: italic; font-weight: bold;">Đã hủy</span></td>
+											<td th:if="${order.status eq 'N'}"><span style="color: green; font-style: italic; font-weight: bold;">Đã nhận hàng</span></td>
+											 <p style="font-weight: 500;">Hình thức thanh toán:  
+											 <td th:if="${order.payment eq 1}"><span style=" font-style: italic; font-weight: bold;">Tiền mặt</span></td>
+											<td th:if="${order.payment eq 2}"><span style=" font-style: italic; font-weight: bold;">Chuyển khoản</span></td>
                                         </div>
                                     </div>
                             <div class="col-sm-12 mt-3" style="border-radius: 10px;box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;">
@@ -81,20 +82,18 @@
                                     <h6 style="font-weight: 700;" >THÔNG TIN SẢN PHẨM</h6>
                                 </div>
                                 
-	                                <div class="row p-3">
+	                                <div class="row p-3" th:each="orderDetail : ${orderDetail}">
 	                                    <div class="col-sm-2">
-	                                       <img src="assets/images/demos/demo-4/cats/1.png" style="width: 100px;" alt="">
+	                                       <img th:src="@{|/image/${orderDetail.img}|}" style="width: 100px;" alt="">
 	                                    </div>
 	                                    <div class="col-sm-8">
-	                                        <p style="font-weight: 500;">Macbook</p>
-	                                        <p style="font-weight: 500;">Số lượng: 100</p>
+	                                        <p style="font-weight: 500;">[[${orderDetail.productName}]]</p>
+	                                        <p style="font-weight: 500;">Số lượng: [[${orderDetail.qty}]]</p>
 	                                    </div>  
-	                                    <div class="col-sm-2">
-	                                        <p style="color: blue; font-weight: 500;">Đang xử lý</p>
-	                                    </div>
+	                                   
 	                                </div>
 	                                <hr>  
-                                </c:forEach>  
+                               
                             </div>
                        </div>
                     </div>

@@ -1,4 +1,4 @@
-<header class="header header-intro-clearance header-4">
+	<header class="header header-intro-clearance header-4">
             <div class="header-top">
                 <div class="container">
                     <div class="header-left">
@@ -34,7 +34,22 @@
                                             </div><!-- End .header-menu -->
                                         </div>
                                     </li>
-                                    <li><a href="#signin-modal" data-toggle="modal">Sign in / Sign up</a></li>
+                                    <th:block th:unless="${#request.remoteUser}">
+	                                    <li>
+	                                    	<a href="/login-form">Sign in / Sign up</a>
+	                                    </li>
+									</th:block>
+									<th:block th:if="${#request.remoteUser}">
+	                                    <li>
+	                                    	<a href="/security/logoff" >Sign out</a>
+
+	                                    	<a href="/user">Welcome [[${#request.remoteUser}]]</a>	
+	                                    	<ul th:object="${#request.userPrincipal}">
+												<li>Username: <b>[[*{name}]]</b></li>
+												<li>Roles: <b>[[*{authorities}]]</b></li>
+											</ul>
+	                                    </li>
+									</th:block>
                                 </ul>
                             </li>
                         </ul><!-- End .top-menu -->
