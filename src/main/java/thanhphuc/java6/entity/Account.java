@@ -43,9 +43,9 @@ public class Account implements Serializable {
 	@Column(name = "email")
 	String email;
 	
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "account" , fetch = FetchType.EAGER)
-	List<Authorities> authorities;
+	List<Authority> authorities;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "account")
