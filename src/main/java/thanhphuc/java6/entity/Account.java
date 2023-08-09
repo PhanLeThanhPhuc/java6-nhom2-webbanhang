@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,10 +43,11 @@ public class Account implements Serializable {
 	@Column(name = "email")
 	String email;
 	
+
 	@OneToMany(mappedBy = "account" , fetch = FetchType.EAGER)
 	List<Authorities> authorities;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "account")
 	List<Order> orders;	
 }

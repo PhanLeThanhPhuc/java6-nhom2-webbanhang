@@ -3,6 +3,7 @@ package thanhphuc.java6.service.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import thanhphuc.java6.entity.Account;
 import thanhphuc.java6.repository.AccountRepository;
 import thanhphuc.java6.service.AccountService;
+
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -36,6 +38,7 @@ public class AccountServiceImpl implements AccountService {
 	public List<Account> getAdministrators() {
 		return dao.getAdministrators();
 	}
+
 
 	@Override
 	public void loginFromOAuth2(OAuth2AuthenticationToken oauth2) {

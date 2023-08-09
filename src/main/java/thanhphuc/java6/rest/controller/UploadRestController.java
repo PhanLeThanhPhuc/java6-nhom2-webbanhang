@@ -1,4 +1,4 @@
-package thanhphuc.java6.controller;
+package thanhphuc.java6.rest.controller;
 
 import java.io.File;
 
