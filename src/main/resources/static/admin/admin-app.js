@@ -2,6 +2,7 @@ app = angular.module("admin-app", ["ngRoute"]);
     app.config(function ($routeProvider) {
         $routeProvider
             .when("/home", { templateUrl: "/admin/home-admin.html" })
+            .when("/authorizing", { templateUrl: "/admin/authority/index.html", controller: "authority-ctrl" })
             .when("/product", { templateUrl: "/admin/product/product.html" , controller: "product-ctrl"})
             .when("/subjectlist", { templateUrl: "subjectlist.html", controller: "subjectlist" })
             .when("/login", { templateUrl: "login.html", controller: "login" })

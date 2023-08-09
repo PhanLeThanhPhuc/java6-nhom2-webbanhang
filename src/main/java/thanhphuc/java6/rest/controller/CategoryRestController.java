@@ -1,4 +1,4 @@
-package thanhphuc.java6.controller;
+package thanhphuc.java6.rest.controller;
 
 import java.util.List;
 
@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import thanhphuc.java6.entity.Brand;
-import thanhphuc.java6.service.BrandService;
+import thanhphuc.java6.entity.Category;
+import thanhphuc.java6.service.CategoryService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/rest/brand")
-public class BrandRestController {
+@RequestMapping("/rest/categories")
+public class CategoryRestController {
 	@Autowired
-	BrandService brandService;
+	CategoryService categoryService;
 	
 	@GetMapping
-	public List<Brand> getAllBrand(){
-		return brandService.findAllBrand();
+	public List<Category> getAllCategories(){
+		return categoryService.findAllCategory();
 	}
 }

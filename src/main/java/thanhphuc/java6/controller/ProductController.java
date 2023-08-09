@@ -59,13 +59,13 @@ public class ProductController {
 		model.addAttribute("product", productService.findProductByIdCategoryAndIdBrand(idCategory, idBrand));
 		return "layout/shopbrand";
 	}
-	
-	@GetMapping("/admin/product")
-	public String viewProductAdmin() {
-		System.out.println("test");
-		return "redirect:/admin/index-admin.html";
-	}
-	
+//	
+//	@GetMapping("/admin/product")
+//	public String viewProductAdmin() {
+//		System.out.println("test");
+//		return "redirect:/admin/index-admin.html";
+//	}
+//	
 	
 	
 }

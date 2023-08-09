@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,11 +47,11 @@ public class Account implements Serializable {
 	
 	@Column(name = "id_facebook")
 	String id_facebook;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "account")
-	List<Authorities> authorities;
+	List<Authority> authorities;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "account")
 	List<Order> orders;	
 }
