@@ -26,15 +26,15 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	BCryptPasswordEncoder pe;
-
+	@Override
 	public List<Account> findAll() {
 		return dao.findAll();
 	}
-
+	@Override
 	public Account findById(String username) {
 		return dao.findById(username).get();
 	}
-
+	@Override
 	public List<Account> getAdministrators() {
 		return dao.getAdministrators();
 	}

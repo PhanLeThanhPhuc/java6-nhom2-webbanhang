@@ -60,11 +60,11 @@ public class ProductController {
 		return "layout/shopbrand";
 	}
 
-	@GetMapping("/admin/product")
-	public String viewProductAdmin() {
-		System.out.println("test");
-		return "redirect:/admin/index-admin.html";
-	}
+//	@GetMapping("/admin/product")
+//	public String viewProductAdmin() {
+//		System.out.println("test");
+//		return "redirect:/admin/index-admin.html";
+//	}
 
 	
 	

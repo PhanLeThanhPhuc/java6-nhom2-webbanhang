@@ -11,7 +11,7 @@ import thanhphuc.java6.entity.Account;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, String>{
 
-	@Query("SELECT DISTINCT ar.account FROM Authorities ar WHERE ar.role.id IN ('DIRE', 'STAF')")
+	@Query("SELECT DISTINCT ar.account FROM Authority ar WHERE ar.role.id IN ('DIRE', 'STAF')")
 	List<Account> getAdministrators();
 	
 }
